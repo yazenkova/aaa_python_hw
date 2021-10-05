@@ -80,7 +80,7 @@ def create_salary_stats_info(info: list) -> dict:
     return salary_stats
 
 
-def print_salary_stats(info: dict) -> None:
+def print_salary_stats(info: list) -> None:
     """
     Функция, которая выводит статистику о зарплате
     :param info: список, состоящий из именованных кортежей Person с атрибутами
@@ -110,11 +110,11 @@ def print_salary_stats(info: dict) -> None:
         )
 
 
-def save_salary_stats(salary_stats: dict,
+def save_salary_stats(info: list,
                       filename: str = 'company_stats.csv') -> None:
     """
     Функция, которая сохраняет статистику о зарплате в файл filename
-    :param salary_stats: список, состоящий из именованных кортежей Person
+    :param info: список, состоящий из именованных кортежей Person
     с атрибутами department, team, salary
     :param filename: название файла для сохранения статистики по зарплатам,
     по умолчанию company_stats.csv
@@ -160,6 +160,7 @@ def menu() -> None:
     чтение файла, файл считывается единожды.
     :return: None
     """
+    info = read_file()
     options = {'1': print_department_structure_info,
                '2': print_salary_stats,
                '3': save_salary_stats}
