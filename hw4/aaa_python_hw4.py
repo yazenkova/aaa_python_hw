@@ -38,10 +38,11 @@ class Advert(ColorizeMixin, Parser):
 
     def __init__(self, data_dict: dict):
         self.price = 0
-        self.title = ''
         super(Advert, self).__init__(data_dict)
         if self.price < 0:
             raise ValueError('price must be >= 0')
+        if not hasattr(self, 'title'):
+            raise ValueError('title cannot be empty')
 
     def __repr__(self):
         return f'{self.title} | {self.price} ₽'
@@ -64,4 +65,4 @@ if __name__ == '__main__':
         print(adv)
         print(adv.class_, adv.price, adv.location.address)
     except ValueError:
-        print('ValueError: price must be >= 0. Try again')
+        print('ValueError: price must be >= 0 and title cannot be empty. Try again')
