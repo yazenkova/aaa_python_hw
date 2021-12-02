@@ -1,0 +1,80 @@
+yazenkova$ python -m doctest -v -o NORMALIZE_WHITESPACE morse.py
+
+*******************
+
+Trying:
+    encode('SOS')
+Expecting:
+    '... --- ...'
+ok
+Trying:
+    encode('')
+Expecting:
+    ''
+ok
+Trying:
+    encode('$')
+Expecting:
+    Traceback (most recent call last):
+    KeyError: '$'
+ok
+Trying:
+    encode(12345)
+Expecting:
+    Traceback (most recent call last):
+    TypeError: 'int' object is not iterable
+ok
+Trying:
+    encode('PYTHON' * 30) #doctest: +ELLIPSIS
+Expecting:
+    '.--. -.-- - .... --- -. ... .--. -.-- - .... --- -.'
+ok
+2 items had no tests:
+    morse
+    morse.decode
+1 items passed all tests:
+   5 tests in morse.encode
+5 tests in 3 items.
+5 passed and 0 failed.
+Test passed.
+(hw5) MacBook-Air:hw5 yazenkova$ python -m doctest -v -o NORMALIZE_WHITESPACE morse.py
+Trying:
+    encode('SOS')
+Expecting:
+    '... --- ...'
+ok
+Trying:
+    encode('')
+Expecting:
+    ''
+ok
+Trying:
+    encode('PYTHON' * 30) #doctest: +ELLIPSIS
+Expecting:
+    '.--. -.-- - .... --- -. ... .--. -.-- - .... --- -.'
+ok
+Trying:
+    encode('THE 1ST PLACE')
+Expecting:
+    '- .... .   .---- ... -   .--. .-.. .- -.-. .'
+ok
+Trying:
+    encode('$')
+Expecting:
+    Traceback (most recent call last):
+    KeyError: '$'
+ok
+Trying:
+    encode(12345)
+Expecting:
+    Traceback (most recent call last):
+    TypeError: 'int' object is not iterable
+ok
+2 items had no tests:
+    morse
+    morse.decode
+1 items passed all tests:
+   6 tests in morse.encode
+6 tests in 3 items.
+6 passed and 0 failed.
+Test passed.
