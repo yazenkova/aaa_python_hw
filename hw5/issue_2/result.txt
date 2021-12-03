@@ -1,15 +1,15 @@
-python -m pytest -v
-=========================================================================== test session starts ============================================================================
+$ python -m pytest -v
+\=========================================================================== test session starts ============================================================================
 platform darwin -- Python 3.9.7, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /Users/yazenkova/miniconda3/envs/hw5/bin/python
 cachedir: .pytest_cache
-rootdir: /Users/yazenkova/Desktop/pythonProject/hw5
-collected 5 items                                                                                                                                                          
+rootdir: /Users/yazenkova/Desktop/pythonProject/hw5/issue_2
+plugins: cov-3.0.0
+collected 4 items
 
-issue 2/test_decode_function_morse.py::test_sos PASSED                                                                                                               [ 20%]
-issue 2/test_decode_function_morse.py::test_empty PASSED                                                                                                             [ 40%]
-issue 2/test_decode_function_morse.py::test_func[... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... -SOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOS] PASSED [ 60%]
-issue 2/test_decode_function_morse.py::test_func[.--. -.-- - .... --- -.-PYTHON] PASSED                                                                              [ 80%]
-issue 2/test_decode_function_morse.py::test_func[- .... .   .---- ... -   .--. .-.. .- -.-. .-THE 1ST PLACE] FAILED                                                  [100%]
+test_decode_function_morse.py::test_func[... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... ... --- ... -SOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOSSOS] PASSED [ 25%]
+test_decode_function_morse.py::test_func[.--. -.-- - .... --- -.-PYTHON] PASSED                                                                                      [ 50%]
+test_decode_function_morse.py::test_func[- .... .   .---- ... -   .--. .-.. .- -.-. .-THE 1ST PLACE] FAILED                                                          [ 75%]
+test_decode_function_morse.py::test_func[-] PASSED                                                                                                                   [100%]
 
 ================================================================================= FAILURES =================================================================================
 __________________________________________________ test_func[- .... .   .---- ... -   .--. .-.. .- -.-. .-THE 1ST PLACE] ___________________________________________________
@@ -19,16 +19,22 @@ s = '- .... .   .---- ... -   .--. .-.. .- -.-. .', exp = 'THE 1ST PLACE'
     @pytest.mark.parametrize('s,exp', [
         ('... --- ... ' * 30, 'SOS' * 30),
         ('.--. -.-- - .... --- -.', 'PYTHON'),
-        ('- .... .   .---- ... -   .--. .-.. .- -.-. .', 'THE 1ST PLACE')
+        ('- .... .   .---- ... -   .--. .-.. .- -.-. .', 'THE 1ST PLACE'),
+        ('', '')
     ])
     def test_func(s, exp):
+        """
+        Тест на правильность работы decoder() на примерах
+        :param s: закодированная строка, подающаяся на вход decoder()
+        :param exp: ожидаемое значение
+        """
 >       assert decode(s) == exp
 E       AssertionError: assert 'THE1STPLACE' == 'THE 1ST PLACE'
 E         - THE 1ST PLACE
 E         ?    -   -
 E         + THE1STPLACE
 
-issue 2/test_decode_function_morse.py:20: AssertionError
+test_decode_function_morse.py:17: AssertionError
 ========================================================================= short test summary info ==========================================================================
-FAILED issue 2/test_decode_function_morse.py::test_func[- .... .   .---- ... -   .--. .-.. .- -.-. .-THE 1ST PLACE] - AssertionError: assert 'THE1STPLACE' == 'THE 1ST PL...
-======================================================================= 1 failed, 4 passed in 0.02s ========================================================================
+FAILED test_decode_function_morse.py::test_func[- .... .   .---- ... -   .--. .-.. .- -.-. .-THE 1ST PLACE] - AssertionError: assert 'THE1STPLACE' == 'THE 1ST PLACE'
+======================================================================= 1 failed, 3 passed in 0.04s ========================================================================

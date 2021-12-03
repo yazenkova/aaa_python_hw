@@ -1,4 +1,4 @@
-yazenkova$ python -m doctest -v -o NORMALIZE_WHITESPACE morse.py
+$ python -m doctest -v -o NORMALIZE_WHITESPACE morse.py
 
 *******************
 

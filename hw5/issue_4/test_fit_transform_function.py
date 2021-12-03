@@ -2,58 +2,70 @@ import pytest
 from one_hot_encoder import fit_transform
 
 
-def test_cities(self):
-        cities = ['Moscow', 'New York', 'Moscow', 'London']
-        exp_transformed_cities = [
-            ('Moscow', [0, 0, 1]),
-            ('New York', [0, 1, 0]),
-            ('Moscow', [0, 0, 1]),
-            ('London', [1, 0, 0]),
-        ]
-
-        self.assertEqual(fit_transform(cities), exp_transformed_cities)
-
-    def test_zero_args(self):
-        with self.assertRaises(TypeError) as context:
-            fit_transform()
-
-    def test_empty_input(self):
-        self.assertEqual(fit_transform([]), [])
-
-    def test_temperature_in(self):
-        input = ['cold', 'cold', 'warm', 'cold', 'hot', 'hot', 'warm', 'cold', 'warm', 'hot']
-        self.assertIn(('warm', [0, 1, 0]), fit_transform(input))
-
-    def test_temperature_not_in(self):
-        input = ['cold', 'cold', 'warm', 'cold', 'hot', 'hot', 'warm', 'cold', 'warm', 'hot']
-        self.assertNotIn(('cold', [0, 1, 0]), fit_transform(input))
-
-    def test_one_string_input(self):
-        input = 'Hello world!'
-        self.assertEqual(fit_transform(input), [('Hello world!', [1])])
-
-    def test_gender_not_equal(self):
-        input = ['Female', 'Female', 'Male', 'Female']
-        answer = [('Female', [0, 1]), ('Female', [0, 1]), ('Male', [1, 0]), ('Female', [0, 1])]
-        self.assertNotEqual(answer, fit_transform(input * 2))
-
-if __name__ == '__main__':
-    unittest.main()
+def test_cities():
+    """
+    Тест на примере из исходного кода
+    """
+    cities = ['Moscow', 'New York', 'Moscow', 'London']
+    exp_transformed_cities = [
+        ('Moscow', [0, 0, 1]),
+        ('New York', [0, 1, 0]),
+        ('Moscow', [0, 0, 1]),
+        ('London', [1, 0, 0]),
+    ]
+    assert fit_transform(cities) == exp_transformed_cities
 
 
-
-def test_sos():
-    assert decode('... --- ...') == 'SOS'
-
-
-def test_empty():
-    assert decode('') == ''
+def test_zero_args():
+    """
+    Тест на отсутствии аргументов (ловим исключение)
+    """
+    with pytest.raises(TypeError):
+        fit_transform()
 
 
 @pytest.mark.parametrize('s,exp', [
-    ('... --- ... ' * 30, 'SOS' * 30),
-    ('.--. -.-- - .... --- -.', 'PYTHON'),
-    ('- .... .   .---- ... -   .--. .-.. .- -.-. .', 'THE 1ST PLACE')
+    (
+            ['cold', 'cold', 'warm', 'cold',
+             'hot', 'hot', 'warm', 'cold',
+             'warm', 'hot'],
+            ('warm', [0, 1, 0])
+    ),
+    (
+            ['Female', 'Female', 'Male', 'Female'],
+            ('Female', [0, 1])
+    )
 ])
-def test_func(s, exp):
-    assert decode(s) == exp
+def test_result_in(s, exp):
+    """
+    Тест на вхождение правильной кодировки слова в ответ
+    :param s: исходный набор строк
+    :param exp: ожидаемая кодировка одного из слов
+    """
+    assert exp in fit_transform(s)
+
+
+@pytest.mark.parametrize('s,exp', [
+    (
+            'Hello world!',
+            [('Hello world!', [1])]
+    ),
+    (
+            ['Female', 'Female', 'Male', 'Female'],
+            [('Female', [0, 1]),
+             ('Female', [0, 1]),
+             ('Male', [1, 0]),
+             ('Female', [0, 1])]
+    ),
+    (
+            [],
+            []
+    )
+])
+def test_result_equal(s, exp):
+    """
+    Тест на соответствие кодировки правильному ответу
+    :param s: исходный набор строк
+    :param exp: ожидаемая кодировка исходного набора
+    """
+    assert fit_transform(s) == exp

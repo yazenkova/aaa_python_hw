@@ -1,0 +1,13 @@
+$ python -m unittest -v
+test_cities (test_fit_transform_function.TestFitTransformFunction) ... ok
+test_empty_input (test_fit_transform_function.TestFitTransformFunction) ... ok
+test_gender_not_equal (test_fit_transform_function.TestFitTransformFunction) ... ok
+test_one_string_input (test_fit_transform_function.TestFitTransformFunction) ... ok
+test_temperature_in (test_fit_transform_function.TestFitTransformFunction) ... ok
+test_temperature_not_in (test_fit_transform_function.TestFitTransformFunction) ... ok
+test_zero_args (test_fit_transform_function.TestFitTransformFunction) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+
+OK

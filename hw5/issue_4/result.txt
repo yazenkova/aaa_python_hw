@@ -1,0 +1,17 @@
+$ python -m pytest -v
+=========================================================================== test session starts ============================================================================
+platform darwin -- Python 3.9.7, pytest-6.2.5, py-1.11.0, pluggy-1.0.0 -- /Users/yazenkova/miniconda3/envs/hw5/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/yazenkova/Desktop/pythonProject/hw5/issue_4
+plugins: cov-3.0.0
+collected 7 items
+
+test_fit_transform_function.py::test_cities PASSED                                                                                                                   [ 14%]
+test_fit_transform_function.py::test_zero_args PASSED                                                                                                                [ 28%]
+test_fit_transform_function.py::test_result_in[s0-exp0] PASSED                                                                                                       [ 42%]
+test_fit_transform_function.py::test_result_in[s1-exp1] PASSED                                                                                                       [ 57%]
+test_fit_transform_function.py::test_result_equal[Hello world!-exp0] PASSED                                                                                          [ 71%]
+test_fit_transform_function.py::test_result_equal[s1-exp1] PASSED                                                                                                    [ 85%]
+test_fit_transform_function.py::test_result_equal[s2-exp2] PASSED                                                                                                    [100%]
+
+============================================================================ 7 passed in 0.03s =============================================================================
