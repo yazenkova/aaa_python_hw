@@ -11,8 +11,8 @@ def my_write(string_text: str):
     Добавление в стандартному выводу текущего времени
     :param string_text: строка для вывода
     """
-    if not len(string_text.replace('\n', '')):
-        return
+    if not string_text.replace('\n', ''):
+        return string_text
     now_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     output_row = f'[{now_str}]: {string_text}\n'
     ORIGINAL_WRITE(output_row)
@@ -24,12 +24,11 @@ def timed_output(func: Callable) -> Callable:
     Добавление вывода текущего времени к работе функции
     :param func: функция, к которой применяется декоратор
     """
-
     def wrapper(*args, **kwargs):
-        now_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        output_row = f"[{now_str}]: "
-        sys.stdout.write(output_row)
-        return func(*args, **kwargs)
+        sys.stdout.write = my_write
+        result = func(*args, **kwargs)
+        sys.stdout.write = ORIGINAL_WRITE
+        return result
 
     return wrapper
 
@@ -57,8 +56,9 @@ def redirect_output(filepath):
             with open(filepath, 'a') as my_file_stdout:
                 sys.stdout = my_file_stdout
                 sys.stdout.write(delimiter)
-                function(*args, **kwargs)
+                result = function(*args, **kwargs)
             sys.stdout = original_stdout
+            return result
         return wrapper
     return decorator
 
