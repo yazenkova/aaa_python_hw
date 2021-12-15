@@ -1,4 +1,3 @@
-import datetime
 from unittest.mock import patch
 from io import StringIO
 import os
